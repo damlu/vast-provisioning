@@ -28,6 +28,8 @@ NODES=(
     "https://github.com/kijai/ComfyUI-KJNodes"
     "https://github.com/theUpsider/ComfyUI-Logic"
     "https://github.com/yuvraj108c/ComfyUI-Upscaler-Tensorrt"
+    "https://github.com/rgthree/rgthree-comfy"
+    "https://github.com/Flow-two/ComfyUI-WanStartEndFramesNative"
 )
 
 CHECKPOINT_MODELS=(
