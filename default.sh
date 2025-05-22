@@ -30,6 +30,9 @@ NODES=(
     "https://github.com/yuvraj108c/ComfyUI-Upscaler-Tensorrt"
     "https://github.com/rgthree/rgthree-comfy"
     "https://github.com/Flow-two/ComfyUI-WanStartEndFramesNative"
+    "https://github.com/kijai/ComfyUI-GIMM-VFI"
+    "https://github.com/Fannovel16/ComfyUI-Frame-Interpolation"
+    "https://github.com/idrirap/ComfyUI-Lora-Auto-Trigger-Words"
 )
 
 CHECKPOINT_MODELS=(
