@@ -33,6 +33,7 @@ NODES=(
     "https://github.com/kijai/ComfyUI-GIMM-VFI"
     "https://github.com/Fannovel16/ComfyUI-Frame-Interpolation"
     "https://github.com/idrirap/ComfyUI-Lora-Auto-Trigger-Words"
+    "https://github.com/pythongosssss/ComfyUI-Custom-Scripts"
 )
 
 CHECKPOINT_MODELS=(
