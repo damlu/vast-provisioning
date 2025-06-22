@@ -59,6 +59,7 @@ UNET_MODELS=(
     "https://huggingface.co/city96/Wan2.1-T2V-14B-gguf/resolve/main/wan2.1-t2v-14b-Q8_0.gguf"
     "https://huggingface.co/city96/Wan2.1-I2V-14B-480P-gguf/resolve/main/wan2.1-i2v-14b-480p-Q8_0.gguf"
     "https://huggingface.co/city96/Wan2.1-FLF2V-14B-720P-gguf/resolve/main/wan2.1-flf2v-14b-720p-Q8_0.gguf"
+    "https://huggingface.co/QuantStack/Wan2.1_14B_VACE-GGUF/resolve/main/Wan2.1_14B_VACE-Q8_0.gguf"
 )
 
 LORA_MODELS=(
