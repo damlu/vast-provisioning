@@ -35,6 +35,10 @@ NODES=(
     "https://github.com/idrirap/ComfyUI-Lora-Auto-Trigger-Words"
     "https://github.com/pythongosssss/ComfyUI-Custom-Scripts"
     "https://github.com/kijai/ComfyUI-WanVideoWrapper"
+    "https://github.com/chrisgoringe/cg-use-everywhere"
+    "https://github.com/Smirnov75/ComfyUI-mxToolkit"
+    "https://github.com/stduhpf/ComfyUI-WanMoeKSampler"
+    "https://github.com/aria1th/ComfyUI-LogicUtils"
 )
 
 CHECKPOINT_MODELS=(
@@ -42,13 +46,13 @@ CHECKPOINT_MODELS=(
 )
 
 DIFFUSION_MODELS=(
-  "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_t2v_14B_bf16.safetensors"
+  #"https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_t2v_14B_bf16.safetensors"
 )
 
 TEXT_ENCODERS=(
-    "https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/text_encoders/clip_l.safetensors"
-    "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp16.safetensors"
-    "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+   # "https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/text_encoders/clip_l.safetensors"
+   # "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp16.safetensors"
+    #"https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
 )
 
 CLIP_VISION=(
@@ -56,10 +60,10 @@ CLIP_VISION=(
 )
 
 UNET_MODELS=(
-    "https://huggingface.co/city96/Wan2.1-T2V-14B-gguf/resolve/main/wan2.1-t2v-14b-Q8_0.gguf"
-    "https://huggingface.co/city96/Wan2.1-I2V-14B-480P-gguf/resolve/main/wan2.1-i2v-14b-480p-Q8_0.gguf"
-    "https://huggingface.co/city96/Wan2.1-FLF2V-14B-720P-gguf/resolve/main/wan2.1-flf2v-14b-720p-Q8_0.gguf"
-    "https://huggingface.co/QuantStack/Wan2.1_14B_VACE-GGUF/resolve/main/Wan2.1_14B_VACE-Q8_0.gguf"
+    #"https://huggingface.co/city96/Wan2.1-T2V-14B-gguf/resolve/main/wan2.1-t2v-14b-Q8_0.gguf"
+    #"https://huggingface.co/city96/Wan2.1-I2V-14B-480P-gguf/resolve/main/wan2.1-i2v-14b-480p-Q8_0.gguf"
+    #"https://huggingface.co/city96/Wan2.1-FLF2V-14B-720P-gguf/resolve/main/wan2.1-flf2v-14b-720p-Q8_0.gguf"
+    #"https://huggingface.co/QuantStack/Wan2.1_14B_VACE-GGUF/resolve/main/Wan2.1_14B_VACE-Q8_0.gguf"
 )
 
 LORA_MODELS=(
@@ -68,7 +72,7 @@ LORA_MODELS=(
 
 VAE_MODELS=(
     "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors"
-    "https://huggingface.co/lovis93/testllm/resolve/main/ae.safetensors"
+    #"https://huggingface.co/lovis93/testllm/resolve/main/ae.safetensors"
 )
 
 ESRGAN_MODELS=(
