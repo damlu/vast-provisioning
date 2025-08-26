@@ -39,6 +39,8 @@ NODES=(
     "https://github.com/Smirnov75/ComfyUI-mxToolkit"
     "https://github.com/stduhpf/ComfyUI-WanMoeKSampler"
     "https://github.com/aria1th/ComfyUI-LogicUtils"
+    "https://github.com/kijai/ComfyUI-Florence2"
+    "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler"
 )
 
 CHECKPOINT_MODELS=(
