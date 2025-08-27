@@ -41,6 +41,7 @@ NODES=(
     "https://github.com/aria1th/ComfyUI-LogicUtils"
     "https://github.com/kijai/ComfyUI-Florence2"
     "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler"
+    "https://github.com/ClownsharkBatwing/RES4LYF"
 )
 
 CHECKPOINT_MODELS=(
