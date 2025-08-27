@@ -119,6 +119,9 @@ function provisioning_start() {
     provisioning_get_files \
         "${COMFYUI_DIR}/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
+    rm "${COMFYUI_DIR}/input"
+    mkdir "${COMFYUI_DIR}/output/input"
+    ln -s "${COMFYUI_DIR}/output/input" "${COMFYUI_DIR}/input"
     provisioning_print_end
 }
 
