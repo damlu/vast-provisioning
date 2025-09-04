@@ -12,6 +12,7 @@ APT_PACKAGES=(
 
 PIP_PACKAGES=(
     "triton"
+    "comfy-cli"
     "https://huggingface.co/Kijai/PrecompiledWheels/resolve/refs%2Fpr%2F2/sageattention-2.1.1-cp312-cp312-linux_x86_64.whl"
 )
 
@@ -121,6 +122,9 @@ function provisioning_start() {
         "${ESRGAN_MODELS[@]}"
     mv "${COMFYUI_DIR}/input" "${COMFYUI_DIR}/input_"
     ln -s "${COMFYUI_DIR}/output" "${COMFYUI_DIR}/input"
+    cd "${COMFYUI_DIR}"
+    comfy update comfy
+    comfy update all
     provisioning_print_end
 }
 
