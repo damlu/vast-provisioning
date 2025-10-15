@@ -13,7 +13,7 @@ APT_PACKAGES=(
 PIP_PACKAGES=(
     "triton"
     "comfy-cli"
-    "https://huggingface.co/Kijai/PrecompiledWheels/resolve/refs%2Fpr%2F2/sageattention-2.1.1-cp312-cp312-linux_x86_64.whl"
+    "https://huggingface.co/Kijai/PrecompiledWheels/resolve/main/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl"
 )
 
 NODES=(
