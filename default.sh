@@ -123,8 +123,8 @@ function provisioning_start() {
     cd "${COMFYUI_DIR}"
     git checkout master
     git pull
-    yes n | comfy update comfy
-    yes n | comfy update all
+   # yes n | comfy update comfy
+   # yes n | comfy update all
     mv "${COMFYUI_DIR}/input" "${COMFYUI_DIR}/input_"
     ln -s "${COMFYUI_DIR}/output" "${COMFYUI_DIR}/input"
     provisioning_print_end
