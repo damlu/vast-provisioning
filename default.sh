@@ -43,6 +43,7 @@ NODES=(
     "https://github.com/kijai/ComfyUI-Florence2"
     "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler"
     "https://github.com/ClownsharkBatwing/RES4LYF"
+    "https://github.com/adieyal/comfyui-dynamicprompts"
 )
 
 CHECKPOINT_MODELS=(
