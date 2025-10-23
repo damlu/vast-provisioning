@@ -45,6 +45,7 @@ NODES=(
     "https://github.com/ClownsharkBatwing/RES4LYF"
     "https://github.com/adieyal/comfyui-dynamicprompts"
     "https://github.com/yolain/ComfyUI-Easy-Use"
+    "https://github.com/VraethrDalkr/ComfyUI-TripleKSampler"
 )
 
 CHECKPOINT_MODELS=(
