@@ -46,6 +46,7 @@ NODES=(
     "https://github.com/adieyal/comfyui-dynamicprompts"
     "https://github.com/yolain/ComfyUI-Easy-Use"
     "https://github.com/VraethrDalkr/ComfyUI-TripleKSampler"
+    "https://github.com/shootthesound/comfyUI-LongLook"
 )
 
 CHECKPOINT_MODELS=(
