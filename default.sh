@@ -160,19 +160,30 @@ function provisioning_get_apt_packages() {
 function provisioning_get_pip_packages() {
     # Pick a sageattention build that matches the torch CUDA major version:
     # cu12x -> Kijai's precompiled 2.2.0 cu12 wheel (fast CUDA kernels);
-    # cu13x -> PyPI sageattention (1.x, Triton JIT - no CUDA build needed).
-    # A cu13-compatible 2.2 linux wheel for torch 2.10 did not exist as of
-    # 2026-07-08; revisit woct0rdho/SageAttention or build once and stash.
+    # cu13x -> our own SM120 2.2.0 wheel (built 2026-07-08 against
+    # torch 2.10.0+cu130 / py312, attached to the sage-2.2.0-cu130 release),
+    # import-verified with PyPI sageattention (1.x, Triton JIT) as fallback
+    # so an image torch/ABI bump degrades gracefully instead of breaking
+    # --use-sage-attention (a hard import at ComfyUI startup).
+    SAGE_CU13_WHEEL="https://github.com/damlu/vast-provisioning/releases/download/sage-2.2.0-cu130/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl"
     cuda_ver=$(python -c 'import torch; print(torch.version.cuda or "")' 2>/dev/null)
     if [[ "$cuda_ver" == 12.* ]]; then
         PIP_PACKAGES+=("https://huggingface.co/Kijai/PrecompiledWheels/resolve/main/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl")
         printf "sageattention: cu12 torch (%s) -> Kijai precompiled 2.2.0 wheel\n" "$cuda_ver"
-    else
-        PIP_PACKAGES+=("sageattention")
-        printf "sageattention: torch CUDA %s -> PyPI Triton build (1.x)\n" "$cuda_ver"
     fi
     if [[ -n $PIP_PACKAGES ]]; then
             pip install --no-cache-dir ${PIP_PACKAGES[@]}
+    fi
+    if [[ "$cuda_ver" != 12.* ]]; then
+        # Import from / so a stray source checkout can't shadow the install.
+        if pip install --no-cache-dir "$SAGE_CU13_WHEEL" \
+                && (cd / && python -c 'import sageattention') >/dev/null 2>&1; then
+            printf "sageattention: cu13 torch (%s) -> damlu SM120 2.2.0 wheel\n" "$cuda_ver"
+        else
+            printf "sageattention: SM120 wheel install/import FAILED -> PyPI Triton build (1.x)\n"
+            pip uninstall -y sageattention >/dev/null 2>&1
+            pip install --no-cache-dir sageattention
+        fi
     fi
 }
 
