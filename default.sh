@@ -48,6 +48,9 @@ NODES=(
     "https://github.com/VraethrDalkr/ComfyUI-TripleKSampler"
     "https://github.com/shootthesound/comfyUI-LongLook"
     "https://github.com/ShammiG/ComfyUI-Simple_Readable_Metadata-SG"
+    "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch"
+    "https://github.com/1038lab/ComfyUI-RMBG"
+    "https://github.com/chflame163/ComfyUI_LayerStyle"
 )
 
 CHECKPOINT_MODELS=(
