@@ -13,7 +13,7 @@ APT_PACKAGES=(
 PIP_PACKAGES=(
     "triton"
     "comfy-cli"
-    "https://huggingface.co/Kijai/PrecompiledWheels/resolve/main/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl"
+    # sageattention is appended per-CUDA in provisioning_get_pip_packages
 )
 
 NODES=(
@@ -135,17 +135,18 @@ function provisioning_start() {
 }
 
 function provisioning_check_cuda() {
-    # The sageattention wheel in PIP_PACKAGES is a cu12 build and COMFYUI_ARGS
-    # uses --use-sage-attention, so a non-cu12 image crash-loops ComfyUI on
-    # import. Templates must pin a cuda-12 image tag (not @vastai-automatic-tag,
-    # which resolves per host and can hand out cuda-13 builds).
+    # cu13x images are REQUIRED for full comfy_kitchen optimized CUDA ops:
+    # on cu12x torch, ComfyUI 0.27 falls back to unoptimized quantized ops
+    # that bloat GGUF forwards by ~8 GB and OOM 14B Q8 on 32 GB cards
+    # (root-caused 2026-07-08). Templates pin a cuda-13 image tag; never use
+    # @vastai-automatic-tag (it resolves per host).
     cuda_ver=$(python -c 'import torch; print(torch.version.cuda or "none")' 2>/dev/null)
-    if [[ "$cuda_ver" != 12.* ]]; then
+    if [[ "$cuda_ver" == 12.* ]]; then
         printf "\n############################################################\n"
-        printf "WARNING: torch reports CUDA %s; the pinned sageattention\n" "$cuda_ver"
-        printf "WARNING: wheel is cu12. ComfyUI WILL crash-loop with\n"
-        printf "WARNING: --use-sage-attention. Pin the template image to a\n"
-        printf "WARNING: cuda-12 tag (e.g. v0.27.0-cuda-12.9-py312).\n"
+        printf "WARNING: torch reports CUDA %s (cu12). comfy_kitchen\n" "$cuda_ver"
+        printf "WARNING: optimized ops are unavailable; large GGUF models\n"
+        printf "WARNING: will OOM. Pin the template image to a cuda-13 tag\n"
+        printf "WARNING: (e.g. v0.27.0-cuda-13.2-py312).\n"
         printf "############################################################\n\n"
     fi
 }
@@ -157,6 +158,19 @@ function provisioning_get_apt_packages() {
 }
 
 function provisioning_get_pip_packages() {
+    # Pick a sageattention build that matches the torch CUDA major version:
+    # cu12x -> Kijai's precompiled 2.2.0 cu12 wheel (fast CUDA kernels);
+    # cu13x -> PyPI sageattention (1.x, Triton JIT - no CUDA build needed).
+    # A cu13-compatible 2.2 linux wheel for torch 2.10 did not exist as of
+    # 2026-07-08; revisit woct0rdho/SageAttention or build once and stash.
+    cuda_ver=$(python -c 'import torch; print(torch.version.cuda or "")' 2>/dev/null)
+    if [[ "$cuda_ver" == 12.* ]]; then
+        PIP_PACKAGES+=("https://huggingface.co/Kijai/PrecompiledWheels/resolve/main/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl")
+        printf "sageattention: cu12 torch (%s) -> Kijai precompiled 2.2.0 wheel\n" "$cuda_ver"
+    else
+        PIP_PACKAGES+=("sageattention")
+        printf "sageattention: torch CUDA %s -> PyPI Triton build (1.x)\n" "$cuda_ver"
+    fi
     if [[ -n $PIP_PACKAGES ]]; then
             pip install --no-cache-dir ${PIP_PACKAGES[@]}
     fi
