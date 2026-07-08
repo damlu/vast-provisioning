@@ -91,6 +91,7 @@ CONTROLNET_MODELS=(
 
 function provisioning_start() {
     provisioning_print_header
+    provisioning_check_cuda
     provisioning_get_apt_packages
     provisioning_get_nodes
     provisioning_get_pip_packages
@@ -131,6 +132,22 @@ function provisioning_start() {
     mv "${COMFYUI_DIR}/input" "${COMFYUI_DIR}/input_"
     ln -s "${COMFYUI_DIR}/output" "${COMFYUI_DIR}/input"
     provisioning_print_end
+}
+
+function provisioning_check_cuda() {
+    # The sageattention wheel in PIP_PACKAGES is a cu12 build and COMFYUI_ARGS
+    # uses --use-sage-attention, so a non-cu12 image crash-loops ComfyUI on
+    # import. Templates must pin a cuda-12 image tag (not @vastai-automatic-tag,
+    # which resolves per host and can hand out cuda-13 builds).
+    cuda_ver=$(python -c 'import torch; print(torch.version.cuda or "none")' 2>/dev/null)
+    if [[ "$cuda_ver" != 12.* ]]; then
+        printf "\n############################################################\n"
+        printf "WARNING: torch reports CUDA %s; the pinned sageattention\n" "$cuda_ver"
+        printf "WARNING: wheel is cu12. ComfyUI WILL crash-loop with\n"
+        printf "WARNING: --use-sage-attention. Pin the template image to a\n"
+        printf "WARNING: cuda-12 tag (e.g. v0.27.0-cuda-12.9-py312).\n"
+        printf "############################################################\n\n"
+    fi
 }
 
 function provisioning_get_apt_packages() {
